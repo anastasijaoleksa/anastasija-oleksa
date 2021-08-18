@@ -1,0 +1,62 @@
+const curaCommands = {
+prepareWebsite: function () {
+    return this
+    .navigate ()
+    .waitForElementVisible('@textVerticalCenter', 10 * 1000)
+},
+attemptSignIn: function (person) {
+    return this
+    .click('@openMenu')
+    .click('@openLogin')
+    .setValue('@demoContactName', person.contactName)
+    .setValue('@demoContactPassword', person.contactPassword)
+    .click('@loginButton')
+},
+bookingAnAppointment: function (facility) {
+    return this
+    .click('@facility')
+    .setValue('@facility', facility.facilityData)
+    .click ('@redmissionChecked')
+    .click('@programMedicaid')
+    .setValue('@visitDate', facility.visitDate)
+    .click('@addComment')
+    .setValue('@addComment', facility.comment)
+    .click('@bookAnAppointment')
+},
+validationOfData: function () {
+    this.getText('@getTextAfter')
+},
+LogoutFromCura: function () {
+    this.click('@openMenu')
+    this.click('@logout')
+},
+Verify: function (element) {
+    return this
+    .assert.not.elementPresent(element)
+   },
+}
+module.exports = {
+url:'https://katalon-demo-cura.herokuapp.com/',
+commands: [curaCommands],
+elements:{
+textVerticalCenter:'.text-vertical-center',
+openMenu: 'i, fa fa-bars',
+openLogin: '[href^="profile"]',
+demoContactName: '#txt-username',
+demoContactPassword: '#txt-password',
+loginButton: '#btn-login',
+facility: '#combo_facility',
+redmissionChecked: '#chk_hospotal_readmission',
+programMedicaid: '#radio_program_medicaid',
+visitDate: '#txt_visit_date',
+addComment: '#txt_comment',
+bookAnAppointment: '#btn-book-appointment',
+getTextAfter: '.row',
+logout: '[href^="authenticate.php"]',
+notDisplayed: '.Seoul cura healthcare center ', 
+notDisplayed: '#program',
+notDisplayed: '#visit_date',
+notDisplayed: '#comment',
+
+}
+}
