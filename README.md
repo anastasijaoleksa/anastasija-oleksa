@@ -1,5 +1,3 @@
-# anastasija-oleksa
-
 module.exports = {
     'cura.js': client => {
       let curaPage = client.page.curaPage();
